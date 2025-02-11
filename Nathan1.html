@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Special</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .page {
+            display: none;
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .active {
+            display: block;
+        }
+
+        button {
+            background: #ff477e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff1e56;
+        }
+
+        .hidden {
+            display: none;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+
+        /* Heart Animation */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: 10px;
+        }
+
+        /* Falling Hearts Animation */
+        @keyframes float {
+            0% {
+                transform: translateY(-100vh) rotate(-45deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(-45deg);
+            }
+        }
+
+        /* Fade-in Animation */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Welcome -->
+    <div id="page1" class="page active">
+        <h1 class="fade-in">Welcome to a Special Valentine's Journey
+            <b>Eden💕</b>
+        </h1>
+        <p>"Love is not about how many days, months, or years you have been together. It's all about how much you love each other every single day."</p>
+        <button onclick="startJourney()">Start the Journey</button>
+        <audio id="bgMusic">
+            <source src="Found_you.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <!-- Page 2: Love Quiz -->
+    <div id="page2" class="page">
+        <h1 class="fade-in">Love Quiz</h1>
+        <p>Let's see how well you know your Me!</p>
+        <div id="quiz">
+            <p>What is your partner's favorite color?</p>
+            <button onclick="checkAnswer('red')">Red</button>
+            <button onclick="checkAnswer('blue')">Blue</button>
+            <button onclick="checkAnswer('green')">Green</button>
+            <button onclick="checkAnswer('yellow')">Yellow</button>
+        </div>
+        <div id="quiz-result" class="hidden"></div>
+        <button id="next-button" class="hidden" onclick="nextPage(3)">Next</button>
+    </div>
+
+    <!-- Page 3: Surprise Reveal -->
+    <div id="page3" class="page">
+        <h1 class="fade-in">A Special Surprise Awaits</h1>
+        <p>Click the button below to reveal your surprise!</p>
+        <button onclick="nextPage(4)">Reveal Surprise</button>
+    </div>
+
+    <!-- Page 4: Love Letter -->
+    <div id="page4" class="page">
+        <h1 class="fade-in">A Love Letter for You</h1>
+        <p><b>My Love, My Forever  EDEN💓</b>,
+
+            <i>Five years ago, we were just two young dreamers—an 18-year-old boy with big ambitions and a girl with a heart full of love and fire. We had nothing but each other, a vision, and an unshakable belief that we were meant for greatness.
+            
+            Now, here we are. Not just as lovers, but as builders of our own empire. Not just as dreamers, but as millionaires who made it happen—together. Every sleepless night, every challenge, every sacrifice—it all led us to this moment. We didn’t just chase success; we created it, hand in hand, never letting go.
+            
+            But my love, the greatest victory isn’t the wealth, the achievements, or the world knowing our names. It’s the fact that through it all, we remained us. We stayed the same two souls who found joy in the simplest moments, who held each other up in the hardest times, and who never forgot that love was always our greatest treasure.
+            
+            We built an empire, but more importantly, we built a love so strong that even time and success could never shake it. And this? This is just the beginning. Because with you, forever isn’t long enough, and no amount of riches could ever outshine the glow of your love.
+            
+            So here’s to us—to the boy who became a man, to the girl who became his queen, and to a love story that turned dreams into destiny.
+            </i>
+            Forever yours,
+           <b> Your love, your partner, your forever NATHAN❤️</b>
+            
+            </p>
+        <button onclick="nextPage(5)">Next</button>
+    </div>
+
+    <!-- Page 5: Valentine's Day Celebration -->
+    <div id="page5" class="page">
+        <h1 class="fade-in">Happy Valentine's Day! Eden💕</h1>
+        <p>"You are the reason I believe in love. Thank you for being my everything. I love you to the moon and back! 🌙❤️"</p>
+    </div>
+
+    <!-- Heart Animation Container -->
+    <div id="heart-container"></div>
+
+    <script>
+        // Function to navigate between pages
+        function nextPage(pageNumber) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(`page${pageNumber}`).classList.add('active');
+        }
+
+        // Function to check quiz answer
+        function checkAnswer(answer) {
+            const quizResult = document.getElementById('quiz-result');
+            const nextButton = document.getElementById('next-button');
+            if (answer === 'red') {
+                quizResult.innerHTML = "Correct! Red is the color of love ❤️";
+            } else {
+                quizResult.innerHTML = "Nice try! But red is the color of love ❤️";
+            }
+            quizResult.classList.remove('hidden');
+            nextButton.classList.remove('hidden');
+        }
+
+        // Function to create falling hearts
+        function createFallingHearts() {
+            const heartContainer = document.getElementById('heart-container');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                heartContainer.appendChild(heart);
+            }
+        }
+
+        // Function to start the journey and play music
+        function startJourney() {
+            const audio = document.getElementById('bgMusic');
+            audio.play(); // Play the audio
+            nextPage(2); // Go to the next page
+        }
+
+        // Initialize heart animations
+        createFallingHearts();
+    </script>
+</body>
+</html>
