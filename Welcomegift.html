@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Love</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Pacifico', cursive;
+      margin: 0;
+      padding: 0;
+      background: #740144; /* Dark background */
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .page {
+      display: none;
+      padding: 20px;
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .page.active {
+      display: flex;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.1); /* Glass-like button */
+      backdrop-filter: blur(10px);
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    /* Welcome Page */
+    #welcome-page {
+      background: linear-gradient(135deg, #1a1a1a, #2c3e50);
+    }
+
+    /* Memories Page */
+    #memories-page video {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Story Page */
+    #story-page {
+      background: linear-gradient(135deg, #1a1a1a, #34495e);
+    }
+
+    .story-section {
+      display: none;
+    }
+
+    .story-section.active {
+      display: block;
+    }
+
+    #story-page img {
+      width: 80%;
+      max-width: 400px;
+      border-radius: 20px;
+      margin: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Navigation Arrows */
+    .nav-arrows {
+      display: flex;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .nav-arrows button {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-arrows button:hover {
+      transform: scale(1.2);
+    }
+
+    /* Valentine Page */
+    #valentine-page {
+      background: linear-gradient(135deg, #1a1a1a, #8e44ad);
+    }
+
+    #no-button {
+      position: absolute;
+      transition: all 0.3s ease;
+    }
+
+    /* Gift Card Page */
+    #gift-card-page {
+      background: linear-gradient(135deg, #1a1a1a, #3498db);
+    }
+
+    #gift-card-page img {
+      width: 80%;
+      max-width: 400px;
+      border-radius: 20px;
+      margin: 20px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Quote Page */
+    #quote-page {
+      background: linear-gradient(135deg, #1a1a1a, #e74c3c);
+    }
+
+    #quote-page p {
+      font-size: 2rem;
+      font-style: italic;
+      animation: fadeIn 2s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Love Animations */
+    .heart {
+      position: absolute;
+      color: #ff6b6b;
+      font-size: 20px;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-20px) rotate(20deg); }
+      100% { transform: translateY(0) rotate(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      button {
+        font-size: 1rem;
+      }
+
+      #quote-page p {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Welcome Page -->
+  <div id="welcome-page" class="page active">
+    <h1>Welcome to Our Valentine's Journey</h1>
+    <button onclick="startJourney()">Start</button>
+  </div>
+
+  <!-- Memories Page -->
+  <div id="memories-page" class="page">
+    <h1>Our Memories</h1>
+    <video controls>
+      <source src="salena.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <button onclick="goToStory()">Next</button>
+  </div>
+
+  <!-- Story Page -->
+  <div id="story-page" class="page">
+    <h1>Our Story</h1>
+    <div class="story-section active">
+      <p>I never believed in fate—not until she walked into my life. Selena. The name itself felt like a song, a melody I never wanted to stop listening to.
+
+        We weren’t supposed to meet that day, but life has a way of making unexpected moments the most magical ones. She laughed at something silly I said, and in that instant, I knew—I was hers, long before she even knew me.</p>
+      <img src="Lovepic.jpg" alt="Our Story">
+    </div>
+    <div class="story-section">
+      <p>We had so many amazing moments together...</p>
+      <img src="Our first.jpg" alt="Our Story">
+    </div>
+    <div class="story-section">
+      <p>And our journey continues...</p>
+      <img src="Story.jpg" alt="Our Story">
+    </div>
+    <div class="nav-arrows">
+      <button onclick="previousStorySection()">&#10094;</button>
+      <button onclick="nextStorySection()">&#10095;</button>
+    </div>
+    <button onclick="goToValentine()">👉🏻👀</button>
+  </div>
+
+  <!-- Valentine Page -->
+  <div id="valentine-page" class="page">
+    <h1>Will You Be My Valentine?</h1>
+    <button onclick="goToGiftCard()">Yes!💓</button>
+    <button id="no-button" onmouseover="moveNoButton()">No</button>
+  </div>
+
+  <!-- Gift Card Page -->
+  <div id="gift-card-page" class="page">
+    <h1>Your Gift Card</h1>
+    <p>Here's a special gift for you!</p>
+    <img src="Giftcard2.jpg" alt="Gift Image">
+    <button onclick="goToQuote()">Lastly😌</button>
+  </div>
+
+  <!-- Quote Page -->
+  <div id="quote-page" class="page">
+    <h1>Our Love in Words</h1>
+    <p>"You are my today and all of my tomorrows."</p>
+  </div>
+
+  <!-- Background Music -->
+  <audio id="background-music" loop>
+    <source src="Romeo take me.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Love Animations -->
+  <div id="hearts-container"></div>
+
+  <script>
+    // Function to start the journey
+    function startJourney() {
+      document.getElementById('welcome-page').classList.remove('active');
+      document.getElementById('memories-page').classList.add('active');
+      document.getElementById('background-music').play();
+    }
+
+    // Function to go to the story page
+    function goToStory() {
+      document.getElementById('memories-page').classList.remove('active');
+      document.getElementById('story-page').classList.add('active');
+    }
+
+    // Story Page Navigation
+    let currentStorySection = 0;
+    const storySections = document.querySelectorAll('.story-section');
+
+    function showStorySection(index) {
+      storySections.forEach((section, i) => {
+        section.classList.toggle('active', i === index);
+      });
+    }
+
+    function nextStorySection() {
+      if (currentStorySection < storySections.length - 1) {
+        currentStorySection++;
+        showStorySection(currentStorySection);
+      }
+    }
+
+    function previousStorySection() {
+      if (currentStorySection > 0) {
+        currentStorySection--;
+        showStorySection(currentStorySection);
+      }
+    }
+
+    // Function to go to the Valentine page
+    function goToValentine() {
+      document.getElementById('story-page').classList.remove('active');
+      document.getElementById('valentine-page').classList.add('active');
+    }
+
+    // Function to move the "No" button
+    function moveNoButton() {
+      const noButton = document.getElementById('no-button');
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noButton.style.left = `${x}px`;
+      noButton.style.top = `${y}px`;
+    }
+
+    // Function to go to the gift card page
+    function goToGiftCard() {
+      document.getElementById('valentine-page').classList.remove('active');
+      document.getElementById('gift-card-page').classList.add('active');
+    }
+
+    // Function to go to the quote page
+    function goToQuote() {
+      document.getElementById('gift-card-page').classList.remove('active');
+      document.getElementById('quote-page').classList.add('active');
+    }
+
+    // Love Animations
+    function createHearts() {
+      const heartsContainer = document.getElementById('hearts-container');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    createHearts();
+  </script>
+</body>
+</html>
