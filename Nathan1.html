@@ -117,7 +117,11 @@
             <b>Eden💕</b>
         </h1>
         <p>"Love is not about how many days, months, or years you have been together. It's all about how much you love each other every single day."</p>
-        <button onclick="nextPage(2)">Start the Journey</button>
+        <button onclick="startJourney()">Start the Journey</button>
+        <audio id="bgMusic">
+            <source src="Until I found you.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
     <!-- Page 2: Love Quiz -->
@@ -173,12 +177,6 @@
     <!-- Heart Animation Container -->
     <div id="heart-container"></div>
 
-    <!-- Audio -->
-    <audio autoplay loop>
-        <source src="Until I found you.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
     <script>
         // Function to navigate between pages
         function nextPage(pageNumber) {
@@ -209,6 +207,13 @@
                 heart.style.animationDuration = `${Math.random() * 3 + 2}s`;
                 heartContainer.appendChild(heart);
             }
+        }
+
+        // Function to start the journey and play music
+        function startJourney() {
+            const audio = document.getElementById('bgMusic');
+            audio.play(); // Play the audio
+            nextPage(2); // Go to the next page
         }
 
         // Initialize heart animations
